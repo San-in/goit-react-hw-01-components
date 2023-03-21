@@ -1,1 +1,1 @@
-export const titleOfStats = "Upload stats";
+export const titleOfStats = 'Upload stats';

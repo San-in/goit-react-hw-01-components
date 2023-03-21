@@ -1,27 +1,32 @@
-import PropTypes from "prop-types";
-import { StatisticItem } from "components/StatisticItem/StatisticItem";
-import { colors } from "./colors";
-import { 
-    StatisticsConteiner,
-    StatisticsTitle,
-    StatisticsList,
+import PropTypes from 'prop-types';
+import { StatisticItem } from 'components/StatisticItem/StatisticItem';
+import { colors } from 'components/Statistics/colors';
+import {
+	StatisticsConteiner,
+	StatisticsTitle,
+	StatisticsList,
+} from 'components/Statistics/Statistics.styled';
 
-} from "./Statistics.styled";
-
-export const Statistics = ({dataOfstats, title}) => {
-  
-    return (
-        <StatisticsConteiner>
-            {title && <StatisticsTitle>{title}</StatisticsTitle> }
-            <StatisticsList>
-                {dataOfstats.map((item, index) => 
-                     <StatisticItem statItem={item} key={item.id} color={colors[index]}/>)}
-             </StatisticsList>
-        </StatisticsConteiner>
-    )
+export const Statistics = ({ stats, title }) => {
+	return (
+		<StatisticsConteiner>
+			{title && <StatisticsTitle>{title}</StatisticsTitle>}
+			<StatisticsList>
+				{stats.map((item, index) => (
+					<StatisticItem statItem={item} key={item.id} color={colors[index]} />
+				))}
+			</StatisticsList>
+		</StatisticsConteiner>
+	);
 };
 
 Statistics.propTypes = {
-    title: PropTypes.string,
-    dataOfstats:PropTypes.arrayOf(PropTypes.object).isRequired,
-}
+	title: PropTypes.string,
+	stats: PropTypes.arrayOf(
+		PropTypes.exact({
+			label: PropTypes.string.isRequired,
+			percentage: PropTypes.number.isRequired,
+			id: PropTypes.string.isRequired,
+		})
+	).isRequired,
+};
